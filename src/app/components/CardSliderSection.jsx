@@ -10,7 +10,7 @@ const cards = [
   { title: 'myiq', href: 'https://myiq.ch', image: '/card1.webp' },
   { title: 'brainbloom', href: 'https://brainbloom.ch', image: '/card2.webp' },
   { title: 'blue-lotos', href: 'https://blue-lotos.ch', image: '/card3.webp' },
-  { title: 'bellu', href: 'https://bellu.ch', image: '/card2.webp' },
+  { title: 'bellu', href: 'https://bellu.ch', image: '/card4.webp' },
 ]
 
 export default function CardSliderSection() {
