@@ -49,7 +49,7 @@ export const metadata = {
     siteName: "Baumgartner Development",
     images: [
       {
-        url: "/images/bg.webp",
+        url: "/images/bg.jpg",
         width: 1200,
         height: 630,
         alt: "Baumgartner Development – Next.js SEO Agentur Schweiz",

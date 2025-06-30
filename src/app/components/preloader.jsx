@@ -8,7 +8,7 @@ export default function Preloader({ children }) {
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
-    const duration = 1000 // reine Anzeigedauer (optional animiert)
+    const duration = 2500 // reine Anzeigedauer (optional animiert)
     const steps = 30
     const interval = duration / steps
 
