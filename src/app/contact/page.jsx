@@ -1,14 +1,12 @@
-// 1. Kontaktformular: /app/contact/page.jsx (angepasst mit reCAPTCHA v2)
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import MenuButton from '../components/MenuButton'
 import FullScreenMenu from '../components/FullscrenMenu'
 import Preloader from '../components/preloader'
 import CustomCursor from "../components/CustomCursor"
 import Footer from '../components/Footer'
-import ReCAPTCHA from 'react-google-recaptcha'
 
 const Canvas = dynamic(() => import('@react-three/fiber').then(mod => mod.Canvas), { ssr: false })
 const ParticleNetwork = dynamic(() => import('../components/ParticleNetwork'), { ssr: false })
@@ -18,12 +16,31 @@ export default function ContactPage() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [captchaToken, setCaptchaToken] = useState(null)
 
+  // ⬇️ Script für reCAPTCHA v3 initialisieren
+  useEffect(() => {
+    const loadRecaptcha = () => {
+      if (!window.grecaptcha) return
+
+      window.grecaptcha.ready(() => {
+        window.grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY, { action: 'submit' }).then(token => {
+          setCaptchaToken(token)
+        })
+      })
+    }
+
+    const script = document.createElement('script')
+    script.src = `https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`
+    script.async = true
+    script.onload = loadRecaptcha
+    document.body.appendChild(script)
+  }, [])
+
   async function handleSubmit(e) {
     e.preventDefault()
     setStatus('Senden...')
 
     if (!captchaToken) {
-      setStatus('Bitte Captcha bestätigen.')
+      setStatus('Bitte reCAPTCHA abschliessen.')
       return
     }
 
@@ -69,11 +86,7 @@ export default function ContactPage() {
             <input name="email" type="email" required placeholder="Deine E-Mail" className="w-full border p-3 rounded" />
             <textarea name="message" required placeholder="Deine Nachricht" rows="5" className="w-full border p-3 rounded" />
 
-            <ReCAPTCHA
-              sitekey="6LcFGHMrAAAAAC7tgfv3nHqAB7gOp6E1saWdWnKb"
-              onChange={token => setCaptchaToken(token)}
-            />
-
+            {/* kein sichtbares Captcha */}
             <button type="submit" className="bg-orange-500 text-white px-6 py-3 rounded hover:bg-orange-600">Absenden</button>
             <p className="text-sm text-gray-600">{status}</p>
           </form>

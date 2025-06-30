@@ -1,4 +1,3 @@
-// app/api/contact/route.js
 export async function POST(req) {
   const body = await req.json();
   const { name, email, message, captcha } = body;
@@ -10,12 +9,17 @@ export async function POST(req) {
   }
 
   const secretKey = process.env.RECAPTCHA_SECRET_KEY;
-  const verifyURL = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${captcha}`;
+  const verifyURL = `https://www.google.com/recaptcha/api/siteverify`;
 
-  const captchaRes = await fetch(verifyURL, { method: 'POST' });
-  const captchaJson = await captchaRes.json();
+  const res = await fetch(verifyURL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `secret=${secretKey}&response=${captcha}`,
+  });
 
-  if (!captchaJson.success) {
+  const data = await res.json();
+
+  if (!data.success || data.score < 0.5) {
     return new Response(JSON.stringify({ message: 'Captcha-Verifizierung fehlgeschlagen.' }), {
       status: 403,
     });

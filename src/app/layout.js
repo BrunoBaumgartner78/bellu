@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: {
-    default: "Baumgartner Web Desing & Development – Webdesign, SEO & UX/UI aus der Schweiz",
+    default: "Baumgartner Development – Webdesign, SEO & UX/UI aus der Schweiz",
     template: "%s | Baumgartner Development",
   },
   description:
@@ -49,7 +49,7 @@ export const metadata = {
     siteName: "Baumgartner Development",
     images: [
       {
-        url: "/images/bg.jpg",
+        url: "/images/bg.jpeg",
         width: 1200,
         height: 630,
         alt: "Baumgartner Development – Next.js SEO Agentur Schweiz",

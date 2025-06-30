@@ -3,9 +3,9 @@
 export default function PriceList({ visible }) {
   return (
     <div
-      className={`fixed bottom-6 left-6 transition-opacity duration-700 pointer-events-none ${
+     className={`transition-opacity duration-700 ${
         visible ? 'opacity-100' : 'opacity-0'
-      } z-50 max-w-sm w-[280px] text-left`}
+      } absolute top-0 right-0 p-4 max-w-sm text-right`}
       style={{
         color: 'black',
         textShadow: '1px 1px 2px rgba(0, 0, 0, 0.7)',

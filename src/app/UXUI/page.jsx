@@ -34,6 +34,8 @@ export default function ResponsivePage() {
           <h1 className="absolute top-28 left-1/2 transform -translate-x-1/2 text-3xl md:text-5xl font-bold text-orange-600 z-10 text-center px-4">
             Responsive Design & UX/UI
           </h1>
+           {/* Weißer Verlauf unten */}
+      <div className="absolute bottom-0 left-0 w-full h-32 z-10 pointer-events-none bg-gradient-to-t from-white to-transparent" />
         </section>
 
         {/* Beschreibung */}
