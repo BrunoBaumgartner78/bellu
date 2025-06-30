@@ -1,15 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;500;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .animate-ripple {
+    animation: ripple-effect 0.5s ease-out;
+  }
+
+  @keyframes ripple-effect {
+    0% {
+      transform: scale(0.6);
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(2.5);
+      opacity: 0;
+    }
+  }
+}
+
+
+/* Danach dein restliches CSS */
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
+/* ... andere Styles */
+
 @import "tailwindcss";
+
+
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +47,124 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  cursor: none;
+ 
+}
+html, body {
+  position: relative;
+  z-index: 0;
+  scroll-behavior: smooth;
+}
+
+/* In deiner globalen CSS (z. B. styles/globals.css) */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: orange;
+  border-radius: 10px;
+  border: 1px solid white;
+}
+
+/* Optional: Für Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: orange transparent;
+}
+
+
+@media screen and (max-width: 768px){
+  h1{
+    font-size: 2rem;
+  }
+  
+}
+
+
+@layer utilities {
+  .animate-spin-slow {
+    animation: spin 4s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+}
+
+@media print {
+  /* Allgemeines Layout */
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Unsichtbare Elemente beim Drucken */
+  canvas,
+  img,
+  video,
+  footer,
+  nav,
+  button,
+  .menu,
+  .custom-cursor,
+  .preloader,
+  .fullscreen-menu,
+  .no-print,
+  .print-hidden {
+    display: none !important;
+  }
+
+  /* Container anpassen */
+  main,
+  .print-container {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Links formatieren */
+  a::after {
+    content: " (" attr(href) ")";
+    font-size: 10pt;
+  }
+
+  /* Entferne Farben, Schatten, Animationen */
+  * {
+    background: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* Optional: Seite umbrechen */
+  h1, h2, h3, h4 {
+    page-break-after: avoid;
+  }
+
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* Optional: Kopfzeile für Druck (nur sichtbar beim Drucken) */
+  .print-header {
+    display: block !important;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #000;
+    padding-bottom: 0.5rem;
+  }
 }
