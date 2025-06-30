@@ -70,7 +70,7 @@ export default function ContactPage() {
             <textarea name="message" required placeholder="Deine Nachricht" rows="5" className="w-full border p-3 rounded" />
 
             <ReCAPTCHA
-              sitekey="DEIN_SITE_KEY"
+              sitekey="6LcFGHMrAAAAAC7tgfv3nHqAB7gOp6E1saWdWnKb"
               onChange={token => setCaptchaToken(token)}
             />
 
